@@ -1,0 +1,67 @@
+/* .entete{
+    position: fixed-top;
+}  */
+.site-nav-bar{
+    /* border: 2px solid chocolate;    */
+    background-color: dodgerblue;
+    /* position: fixed;  */
+    
+}
+.nav-link{
+    color: white;
+}
+/* .col-8 , .col-4{
+    border: 2px dotted;
+} */
+.logo{
+    background-color: dodgerblue;
+    color: white;
+    width: 90px;
+    height: 90px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 5px;
+   
+}
+.fa-play-circle{
+    vertical-align: middle;
+}
+.fa-bars{
+    float: right;
+}
+.notification{
+    background-color: dimgrey;
+    text-align: center;
+    color: white;
+    padding: 5px Opx;
+}
+.col-sm-6{
+    height: 410px;
+}
+.imp{
+    width: 95%;
+    height: 285px;
+
+   
+}
+/* Publicité */
+.pub-span{
+    background-color: black;
+    color: white;
+    padding: 5px 15px;
+    font-size: 22px;
+    text-align: center;
+}
+.imb{
+    width: 98%;
+}
+.info-pub{
+    padding: 10px 15px;
+}
+.link-pub{
+    width: 100%;
+}
+/* Publicité */
+i:hover{
+    color: blue;
+}

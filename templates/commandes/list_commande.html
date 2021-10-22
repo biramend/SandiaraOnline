@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<br>
+<div class="row">
+	<div class="col-md-5">
+		<h5>Clients:</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="">Créer Un Client</a>
+			<table class="table table-sm">
+				<tr>
+					<th>Prenom</th>
+					<th>Adresse</th>
+					<th>Email</th>
+                    <th>Phone</th>
+				</tr>
+                {% for client in clients %}
+                <tr>
+					<th><a href="{% url 'clients' client.id%}">{{client.prenom}}</a></th>
+					<th>{{client.adresse}}</th>
+					<th>{{client.email}}</th>
+                    <th>{{client.phone}}</th>
+				</tr>
+                {% endfor %}
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h5>Toutes les Comamndes</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="">Ajouter une Commande</a>
+			<table class="table table-sm">
+				<tr>
+					<th>client</th>
+					<th>Produit</th>
+					<th>Date de la commande</th>
+					<th>Status</th>
+					<th>Mise à Jour</th>
+					<th>Supprimer</th>
+				</tr>
+                {% for commande in commandes %}
+				<tr>
+					<th>{{ commande.client }}</th>
+					<th>{{ commande.produit }}</th>
+					<th>{{ commande.dat_commande }}</th>
+					<th>{{ commande.status }}</th>
+
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+
+</div>
+
+
+{% endblock content%}

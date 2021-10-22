@@ -1,0 +1,113 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <link rel="stylesheet" href="{% static 'css/all.min.css' %}"> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <title>Ajouter</title>
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'SAMACSS/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script> -->
+</head>
+<body>
+    
+    {% include 'base/navbar.html' %}
+    <div class="container mb-3">
+        <h1 style="text-align: center;">Votre Panier</h1>
+       <div class="row">
+           <div class="col-md-12">
+              <ul id="item_list" class="list-group list-group-numbered">
+                </ul>
+           </div>
+       </div>
+    </div>
+    <div class="container">
+        <form action="" method="POST" class="">
+            {% csrf_token %}
+            <input type="hidden" name="items" id="items">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="nom" class="form-label">Nom</label>
+                    {{form.nom}}
+                  </div>
+                  <div class="col-md-6">
+                    <label for="phone" class="form-label">Téléphone</label>
+                    {{form.phone}}
+                  </div>
+            </div>
+           <div class="row">
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    {{form.email}}
+                </div>
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Password</label>
+                    {{form.password}}
+                </div>
+           </div>
+            <div class="col-12">
+              <label for="adresse"  class="form-label">Adresse</label>
+              {{form.adresse}}
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="ville" class="form-label">Ville</label>
+                    {{form.ville}}
+                  </div>
+                  <div class="col-md-4">
+                    <label for="pays" class="form-label">Pays</label>
+                    {{form.pays}}
+                  </div>
+                  <div class="col-md-2">
+                    <label for="zipcode" class="form-label">Zip</label>
+                    {{form.zipcode}}
+                  </div>
+                  <div class="col-md-2">
+                      <label for="total" class="form-label">Somme Total</label>
+                      <input name="total" id="total" type="readonly" class="form-control">
+                    </div>
+            </div>
+            
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Commander</button>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        if(localStorage.getItem('panier')==null){
+            var panier ={};
+        }else{
+            panier = JSON.parse(localStorage.getItem('panier'));
+        }
+        var total = 0;
+        var nombre = 0;
+        for(item in panier){
+            let nom = panier[item][1];
+            let quantite = panier[item][0];
+            let prix = panier[item][2];
+            nombre += quantite;
+            total +=prix;
+            let itemsString = `<li class="list-group-item d-flex justify-content-between align-items-start">
+                     <strong style="float: left;"> ${nom}</strong>
+                     <span class="badge bg-primary rounded-pill"> Qte: ${quantite}</span>
+                     <span class="badge bg-primary rounded-pill"> Prix: ${prix}</span>
+                      
+                    </li>` ;
+                    $('#item_list').append(itemsString);        
+        }
+                    let itemsNombre = `<li class="list-group-item d-flex justify-content-between align-items-start">
+                    <strong style="float: left;" class="bg-danger"> Prix et Quantité Total :</strong>
+                    <span class="badge bg-success rounded-pill"> TQE: ${nombre}</span>
+                    <span class="badge bg-success rounded-pill"> Prix Total: ${total} FCFA</span>
+                    </li>` ;
+                    $('#item_list').append(itemsNombre);
+                    $('#total').val(total);
+                    $('#items').val(JSON.stringify(panier));
+     
+     </script>
+</body>
+</html>
